@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 顺序表的简单实现
+ *
  * @author HJHY
  * @date 2021/8/2 - 10:27
  */
@@ -40,8 +41,7 @@ public class SequenceList {
     public SequenceList(int maxLength, int[] elem) {
         this.length = elem.length;
         if (maxLength < length) {
-            System.out.println("空间不足,不能复制数组");
-            System.exit(-1);
+            throw new IndexOutOfBoundsException("空间不足,不能复制数组");
         }
         this.elem = new int[length];
         //复制数组
@@ -58,12 +58,10 @@ public class SequenceList {
      */
     public void insert(int index, int e) {
         if (length == maxLength) {
-            System.out.println("数组已满");
-            return;
+            throw new IndexOutOfBoundsException("数组已满");
         }
         if (index <= 0 || index > length + 1) {
-            System.out.println("插入位置不合适");
-            return;
+            throw new IndexOutOfBoundsException("插入位置不合适");
         }
         /*index-1为元素所在数组的下标，需要将下标为index-1以及以后的数据往后移动一位,然后将元素插入数组index-1的位置*/
         for (int i = length - 1; i >= index - 1; --i) {
@@ -81,8 +79,7 @@ public class SequenceList {
      */
     public void insert(int e) {
         if (length == maxLength) {
-            System.out.println("数组已满");
-            return;
+            throw new IndexOutOfBoundsException("数组已满");
         }
         elem[length] = e;
         ++length;
@@ -95,15 +92,14 @@ public class SequenceList {
      */
     public void delete(int index) {
         if (index <= 0 || index > length) {
-            System.out.println("删除位置不合适");
-            return;
+            throw new IndexOutOfBoundsException("删除位置不合适");
         }
         /*index-1为删除的数组元素下标值,需要将index-1之后的数据往前移动一位,要删除的数据在第一次循环就会被覆盖*/
         for (int i = index; i < length; i++) {
             elem[i - 1] = elem[i];
         }
         /*将位置为length-1的值设置为初始值0(对象为null)*/
-        elem[length-1] = 0;
+        elem[length - 1] = 0;
         --length;
     }
 
@@ -115,8 +111,7 @@ public class SequenceList {
      */
     public void setElem(int index, int e) {
         if (index < 0 || index > length - 1) {
-            System.out.println("修改位置不合适");
-            return;
+            throw new IndexOutOfBoundsException("修改位置不合适");
         }
         elem[index] = e;
     }
