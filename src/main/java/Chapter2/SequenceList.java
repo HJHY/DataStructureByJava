@@ -145,6 +145,22 @@ public class SequenceList {
         return elem[index];
     }
 
+    /**
+     * 获取顺序表大小
+     * @return size
+     */
+    public int size() {
+        return this.length;
+    }
+
+    /**
+     * 获取顺序表最大容量
+     * @return maxLength
+     */
+    public int maxSize() {
+        return this.maxLength;
+    }
+
     @Override
     public String toString() {
         return "SequenceList{" +
