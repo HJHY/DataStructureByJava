@@ -28,6 +28,9 @@ public class SequenceStack {
      * @param maxSize 最大容量
      */
     SequenceStack(int maxSize) {
+        if (maxSize < 1) {
+            throw new IllegalArgumentException("初始容量不能小与1");
+        }
         this.maxSize = maxSize;
         top = base = 0;
         elem = new int[maxSize];

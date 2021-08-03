@@ -34,6 +34,9 @@ public class SequenceQueue {
      * @param maxSize 最大容量
      */
     public SequenceQueue(int maxSize) {
+        if (maxSize < 1) {
+            throw new IllegalArgumentException("初始容量不能小与1");
+        }
         this.maxSize = maxSize;
         front = rear = 0;
         elem = new int[maxSize];

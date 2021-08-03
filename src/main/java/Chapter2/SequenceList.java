@@ -28,6 +28,9 @@ public class SequenceList {
      * @param maxLength 最大长度
      */
     public SequenceList(int maxLength) {
+        if (maxLength < 1) {
+            throw new IllegalArgumentException("初始容量不能小与1");
+        }
         this.maxLength = maxLength;
         elem = new int[maxLength];
         length = 0;
@@ -39,6 +42,9 @@ public class SequenceList {
      * @param elem 数组
      */
     public SequenceList(int maxLength, int[] elem) {
+        if (maxLength < 1) {
+            throw new IllegalArgumentException("初始容量不能小与1");
+        }
         this.length = elem.length;
         if (maxLength < length) {
             throw new IndexOutOfBoundsException("空间不足,不能复制数组");
@@ -147,6 +153,7 @@ public class SequenceList {
 
     /**
      * 获取顺序表大小
+     *
      * @return size
      */
     public int size() {
@@ -155,6 +162,7 @@ public class SequenceList {
 
     /**
      * 获取顺序表最大容量
+     *
      * @return maxLength
      */
     public int maxSize() {
