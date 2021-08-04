@@ -222,6 +222,90 @@ public class BinaryTree {
         } while (!stack.isEmpty());
     }
 
+    /**
+     * 递归计算二叉树深度
+     *
+     * @return 深度
+     */
+    public static int getDepth(BiTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(getDepth(root.left), getDepth(root.right)) + 1;
+    }
+
+    /**
+     * 非递归计算二叉树深度(类似层序遍历)
+     *
+     * @return 深度
+     */
+    public static int getDepthNonRecursion(BiTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int count = 0;
+        LinkedList<BiTreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            ++count;
+            for (int i = queue.size(); i > 0; --i) {
+                BiTreeNode tmp = queue.poll();
+                //左子树进队列
+                assert tmp != null;
+                if (tmp.left != null) {
+                    queue.add(tmp.left);
+                }
+                //右子树进队列
+                if (tmp.right != null) {
+                    queue.add(tmp.right);
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 递归计算节点个数
+     *
+     * @return 节点个数
+     */
+    public static int count(BiTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return count(root.left) + count(root.right) + 1;
+    }
+
+    /**
+     * 非递归计算节点个数
+     *
+     * @return 节点个数
+     */
+    public static int countNonRecursion(BiTreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        LinkedList<BiTreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            count += queue.size();
+            for (int i = queue.size(); i > 0; --i) {
+                BiTreeNode tmp = queue.poll();
+                //左子树进队列
+                assert tmp != null;
+                if (tmp.left != null) {
+                    queue.add(tmp.left);
+                }
+                //右子树进队列
+                if (tmp.right != null) {
+                    queue.add(tmp.right);
+                }
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
         System.out.print("前序递归遍历:");
@@ -242,6 +326,10 @@ public class BinaryTree {
         System.out.print("后序非递归遍历:");
         BinaryTree.postOrderTraverseNonRecursion(binaryTree.root);
         System.out.println();
+        System.out.println("递归计算深度:" + BinaryTree.getDepth(binaryTree.root));
+        System.out.println("非递归计算深度:" + BinaryTree.getDepthNonRecursion(binaryTree.root));
+        System.out.println("递归计算节点数量:" + BinaryTree.count(binaryTree.root));
+        System.out.println("非递归计算节点数量:" + BinaryTree.countNonRecursion(binaryTree.root));
     }
 }
 
