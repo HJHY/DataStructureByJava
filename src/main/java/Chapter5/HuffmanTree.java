@@ -35,27 +35,6 @@ public class HuffmanTree {
      */
     HashMap<Character, String> charAndCodeMap;
 
-
-    public static final int PRINT_SIZE = 15;
-
-    /**
-     * 使用默认的文章进行初始化
-     */
-    public HuffmanTree() {
-        init();
-    }
-
-    /**
-     * 使用参数进行初始化
-     *
-     * @param message 初始化内容
-     */
-    public HuffmanTree(String message) {
-        this.message = message;
-        //统计
-        count();
-    }
-
     /**
      * 编码结果
      */
@@ -67,17 +46,17 @@ public class HuffmanTree {
     String decodeResult = "";
 
     /**
-     * 默认初始化方式
+     * 打印字符串需要换行的字符数量
      */
-    private void init() {
-        message = "The Chinese official said he viewed the Trump Presidency not as\n" +
-                "an aberration but as the product of a failing political system.\n" +
-                "This jibes with other accounts. The Chinese leadership believes that the United\n" +
-                "States, and Western democracies in general, haven’t risen to the\n" +
-                "challenge of a globalized economy, which necessitates big changes in\n" +
-                "production patterns, as well as major upgrades in education and public\n" +
-                "infrastructure. In Trump and Trumpism, the Chinese see an inevitable\n" +
-                "backlash to this failure.";
+    public static final int PRINT_SIZE = 15;
+
+    /**
+     * 使用参数进行初始化
+     *
+     * @param message 初始化内容
+     */
+    public HuffmanTree(String message) {
+        this.message = message;
         //统计
         count();
     }
@@ -223,10 +202,10 @@ public class HuffmanTree {
         }
         System.out.println("译码结果如下:");
         String str = result.toString();
-        for (int i = 1; i <= str.length() / 10; i++) {
-            System.out.println(str.substring(10 * (i - 1), 10 * i));
+        for (int i = 1; i <= str.length() / PRINT_SIZE; i++) {
+            System.out.println(str.substring(PRINT_SIZE * (i - 1), PRINT_SIZE * i));
         }
-        System.out.println(str.substring(str.length() / 10 * 10));
+        System.out.println(str.substring(str.length() / PRINT_SIZE * PRINT_SIZE));
     }
 
     /**
@@ -266,7 +245,15 @@ public class HuffmanTree {
 
 
     public static void main(String[] args) {
-        HuffmanTree huffmanTree = new HuffmanTree();
+        String message = "The Chinese official said he viewed the Trump Presidency not as\n" +
+                "an aberration but as the product of a failing political system.\n" +
+                "This jibes with other accounts. The Chinese leadership believes that the United\n" +
+                "States, and Western democracies in general, haven’t risen to the\n" +
+                "challenge of a globalized economy, which necessitates big changes in\n" +
+                "production patterns, as well as major upgrades in education and public\n" +
+                "infrastructure. In Trump and Trumpism, the Chinese see an inevitable\n" +
+                "backlash to this failure.";
+        HuffmanTree huffmanTree = new HuffmanTree(message);
         huffmanTree.createTree();
         huffmanTree.enCode();
         huffmanTree.printEnCodeResult();
