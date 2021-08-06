@@ -107,6 +107,10 @@ public class BinarySortTree {
         /*分3种情况考虑*/
         //1.叶子节点
         if (deleteNode.left == null && deleteNode.right == null) {
+            //只有根节点并且删除
+            if (deleteParentNode == deleteNode) {
+                this.root = null;
+            }
             //父节点指向后继,同时判断是左子树还是右子树
             if (deleteParentNode.left == deleteNode) {
                 deleteParentNode.left = null;
